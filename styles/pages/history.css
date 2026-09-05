@@ -1,0 +1,53 @@
+/* ==========================================================================
+   History page
+   ========================================================================== */
+.history-block {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.history-block.reverse {
+  flex-direction: row-reverse;
+}
+.history-block img {
+  width: 200px;
+  flex-shrink: 0;
+}
+.history-block p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 0;
+}
+.history-pullquote {
+  text-align: center;
+  font-style: italic;
+  font-size: 17px;
+  color: var(--color-navy);
+  margin: 2rem 0;
+  font-family: var(--font-serif);
+}
+.history-full p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 1rem;
+}
+.history-mic {
+  display: block;
+  width: 90px;
+  margin: 2rem auto 0;
+  opacity: 0.85;
+}
+
+@media (max-width: 700px) {
+  .history-block,
+  .history-block.reverse {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .history-block img {
+    width: 140px;
+  }
+}

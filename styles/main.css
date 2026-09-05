@@ -1,0 +1,695 @@
+/* ==========================================================================
+   Main stylesheet — every page links to this ONE file.
+
+   This file is a merge of variables, base, layout, and components (below),
+   kept in clearly labeled sections so it's still easy to find and edit
+   things. It's ONE physical file for all LOCAL styles (no @import between
+   local files) on purpose: browsers block CSS @import between local files
+   when a page is opened directly via file:// (double-clicked), which
+   silently breaks all styling. Keeping local styles as a single file means
+   the site works whether it's opened directly or hosted on a server.
+
+   The @import below is different — it points at Google's font CDN
+   (a remote https:// resource, not a local file), which is NOT affected
+   by that file:// restriction and works the same whether the site is
+   opened directly or hosted.
+   ========================================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap");
+
+
+/* ==========================================================================
+   Design tokens — change values here to restyle the entire site.
+   ========================================================================== */
+:root {
+  /* Brand colors */
+  --color-navy: #1a1a2e;
+  --color-red: #e84040;
+  --color-red-dark: #c0392b;
+  --color-purple: #7b5cc4;
+  --color-purple-dark: #5a3fa0;
+  --color-purple-pale: #f0edf8;
+  --color-purple-pale-border: #d4c8f0;
+  --color-lilac: #eee8f8;
+
+  /* Surfaces & text */
+  --color-bg: #ffffff;
+  --color-surface-1: #f7f5ff;
+  --surface-1: #f4f4fa;
+  --border: #e4e2ee;
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a5c;
+  --text-muted: #8a8a9a;
+  --text-on-dark: rgba(255, 255, 255, 0.85);
+
+  /* Typography */
+  --font-sans:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  --font-serif: Georgia, "Times New Roman", serif;
+  --font-display: "Oswald", sans-serif;
+
+  /* Layout */
+  --max-width: 1200px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 2px 8px rgba(26, 26, 46, 0.06);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* ==========================================================================
+   Reset & base typography
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Oswald, var(--font-sans);
+  background: var(--color-bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+.site {
+  background: var(--color-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Visually-hidden utility for accessible skip links / screen-reader text */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 0;
+  top: -40px;
+  background: var(--color-red);
+  color: #fff;
+  padding: 10px 16px;
+  z-index: 1000;
+  transition: top 0.15s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ==========================================================================
+   Site layout — header, navigation, banner, main grid, footer
+   ========================================================================== */
+
+/* NAV
+   ========================================================================== */
+.nav {
+  background: var(--color-navy);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  min-height: 52px;
+  position: relative;
+  z-index: 100;
+}
+
+/* Home is its own element (not part of .nav-links) so it can carry an
+   icon on mobile independently of the rest of the menu. */
+.nav-home {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #e8e8f0;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 15px 14px;
+  letter-spacing: 0.02em;
+  transition:
+    color 0.15s,
+    background 0.15s;
+}
+.nav-home:hover,
+.nav-home.active {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+.nav-home.active {
+  border-bottom: 2px solid var(--color-red);
+}
+.nav-home-icon {
+  display: none; /* icon only appears on mobile; desktop shows the text label */
+  flex-shrink: 0;
+}
+
+/* Hamburger toggle — hidden entirely on desktop, only relevant on mobile */
+.nav-toggle-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.nav-toggle-label {
+  display: none;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.hamburger-bar {
+  position: absolute;
+  left: 6px;
+  right: 6px;
+  height: 2px;
+  background: #e8e8f0;
+  border-radius: 2px;
+  transition:
+    transform 0.2s,
+    opacity 0.2s,
+    top 0.2s;
+}
+.hamburger-bar:nth-child(1) {
+  top: 11px;
+}
+.hamburger-bar:nth-child(2) {
+  top: 16px;
+}
+.hamburger-bar:nth-child(3) {
+  top: 21px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  row-gap: 4px;
+  list-style: none;
+  flex-wrap: wrap;
+}
+.nav-links > li {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.nav-links > li > a {
+  color: #e8e8f0;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 18px 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  transition:
+    color 0.15s,
+    background 0.15s;
+  letter-spacing: 0.02em;
+}
+.nav-links > li > a:hover,
+.nav-links > li.active > a {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+.nav-links > li.active > a {
+  border-bottom: 2px solid var(--color-red);
+}
+.chevron {
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+/* DROPDOWN */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  max-width: calc(100vw - 2rem);
+  background: #fff;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  min-width: 180px;
+  display: none;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  z-index: 200;
+}
+.nav-links > li:hover .dropdown,
+.nav-links > li:focus-within .dropdown {
+  display: block;
+}
+
+.dropdown-header {
+  background: var(--color-navy);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 14px 6px;
+}
+.dropdown a {
+  display: block;
+  padding: 9px 14px;
+  font-size: 13px;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 0.5px solid var(--border);
+  position: relative;
+}
+.dropdown a:last-child {
+  border-bottom: none;
+}
+.dropdown a:hover {
+  background: var(--color-purple-pale);
+  color: var(--color-navy);
+}
+.dropdown a .sub-pills {
+  display: flex;
+  gap: 4px;
+  margin-top: 5px;
+}
+
+/* BANNER
+   ========================================================================== */
+.banner {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  max-width: 1400px;
+}
+.banner-img {
+  width: 100%;
+  height: auto;
+}
+
+/* HERO TEXT BAND
+   ========================================================================== */
+.hero-band {
+  background: var(--color-surface-1);
+  border-bottom: 3px solid var(--color-red);
+  padding: 14px 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.hero-band-text {
+  font-size: 15px;
+  color: var(--color-navy);
+  font-style: italic;
+}
+.hero-band-date {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-red);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* MAIN CONTENT AREA
+   ========================================================================== */
+.main {
+  padding: 2rem 3rem;
+  max-width: 100%;
+  flex: 1;
+}
+
+/* Simple single-column page layout for interior pages */
+.main--single {
+  grid-template-columns: 1fr;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 860px) {
+  .main {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+  .hero-band {
+    padding: 14px 1.5rem;
+  }
+}
+
+/* Mobile nav: stack links full-width instead of wrapping chips.
+   Dropdowns flow inline below their parent link instead of being
+   absolutely positioned — an absolutely positioned dropdown anchored to
+   a narrow, edge-hugging link has no reliable "left" or "right" that
+   stays on-screen at every width, so on small screens we avoid that
+   entirely rather than patch left/right overflow case by case. */
+@media (max-width: 700px) {
+  .nav {
+    padding: 0.4rem 1rem;
+    justify-content: space-between;
+  }
+
+  /* Home collapses to icon-only to save space */
+  .nav-home-icon {
+    display: inline-flex;
+  }
+  .nav-home-text {
+    display: none;
+  }
+
+  /* Hamburger button appears; nav-links hides until toggled open */
+  .nav-toggle-label {
+    display: flex;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    row-gap: 0;
+    order: 3;
+  }
+  .nav-toggle-checkbox:checked ~ .nav-links {
+    display: flex;
+  }
+  /* Turn the hamburger into an "X" when the menu is open */
+  .nav-toggle-checkbox:checked ~ .nav-toggle-label .hamburger-bar:nth-child(1) {
+    top: 16px;
+    transform: rotate(45deg);
+  }
+  .nav-toggle-checkbox:checked ~ .nav-toggle-label .hamburger-bar:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle-checkbox:checked ~ .nav-toggle-label .hamburger-bar:nth-child(3) {
+    top: 16px;
+    transform: rotate(-45deg);
+  }
+  .hamburger-bar {
+    transition:
+      transform 0.2s,
+      opacity 0.2s,
+      top 0.2s;
+  }
+
+  .nav-links > li {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .nav-links > li > a {
+    width: 100%;
+    padding: 12px 6px;
+  }
+  .nav-links > li.active > a {
+    border-bottom: none;
+    border-left: 3px solid var(--color-red);
+    padding-left: 10px;
+  }
+  .dropdown {
+    position: static;
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+    border-left: 2px solid var(--color-purple-pale-border);
+    margin: 2px 0 6px 10px;
+  }
+}
+
+
+
+/* FOOTER
+   ========================================================================== */
+.footer {
+  background: var(--color-navy);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  padding: 1.25rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-size: 12px;
+}
+.footer-links a:hover {
+  color: #fff;
+}
+
+/* ==========================================================================
+   Reusable components — widgets, buttons, chips, cards, pills
+   ========================================================================== */
+
+.pill {
+  font-size: 10px;
+  background: var(--color-lilac);
+  color: var(--color-purple-dark);
+  border-radius: 4px;
+  padding: 2px 7px;
+  font-weight: 500;
+}
+.pill:hover {
+  background: #d4c8f8;
+}
+
+/* Page content headings */
+.content h1,
+.content h2 {
+  font-size: 22px;
+  color: var(--color-navy);
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--color-red);
+  display: inline-block;
+}
+.content p {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.content h1 + p,
+.content h2 + p {
+  margin-top: 0.5rem;
+}
+
+/* Photo grid */
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 1.25rem 0;
+}
+.photo-placeholder {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.photo-placeholder.p1 {
+  background: linear-gradient(135deg, #1a3a5c, #2d5a8e);
+}
+.photo-placeholder.p2 {
+  background: linear-gradient(135deg, #7b3a8e, #a855c4);
+}
+.photo-placeholder.p3 {
+  background: linear-gradient(135deg, #e84040, #c0392b);
+}
+.photo-placeholder.p4 {
+  background: linear-gradient(135deg, #1a5c3a, #2d8e5a);
+}
+
+/* Sidebar widgets */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.widget {
+  background: #fff;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.widget-header {
+  background: var(--color-navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 9px 14px;
+}
+.widget-body {
+  padding: 14px;
+}
+
+.dates-list {
+  list-style: none;
+}
+.dates-list li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 7px 0;
+  border-bottom: 0.5px solid var(--border);
+  font-size: 13px;
+}
+.dates-list li:last-child {
+  border-bottom: none;
+}
+.date-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-red);
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+.date-label {
+  font-weight: 500;
+  color: var(--color-navy);
+}
+.date-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.sponsor-logos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.sponsor-box {
+  background: var(--surface-1);
+  border-radius: var(--radius-sm);
+  aspect-ratio: 2/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  text-align: center;
+  padding: 11px 20px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary,
+.donate-btn {
+  display: block;
+  background: var(--color-red);
+  color: #fff;
+}
+.btn-primary:hover,
+.donate-btn:hover {
+  background: var(--color-red-dark);
+}
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--color-navy);
+  color: var(--color-navy);
+}
+.btn-outline:hover {
+  background: var(--color-navy);
+  color: #fff;
+}
+
+/* Workshops preview grid (used on home page) */
+.workshops-preview {
+  margin: 1.5rem 0 0;
+}
+.workshops-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 6px;
+  margin-top: 10px;
+}
+.workshop-chip {
+  background: var(--color-purple-pale);
+  border: 0.5px solid var(--color-purple-pale-border);
+  border-radius: var(--radius-sm);
+  padding: 8px 4px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 500;
+  color: #3d2a7a;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+.workshop-chip:hover {
+  background: #e0d8f8;
+}
+.workshop-chip i {
+  display: block;
+  font-size: 18px;
+  margin-bottom: 4px;
+  color: var(--color-purple);
+}
+
+/* Simple info / callout box used across interior pages */
+.callout {
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-purple-pale-border);
+  border-left: 4px solid var(--color-red);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  margin: 1.25rem 0;
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.callout strong {
+  color: var(--color-navy);
+}

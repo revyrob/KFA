@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Donations page
+   ========================================================================== */
+.donate-hero {
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-purple-pale-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+}
+.donate-hero p:last-child {
+  margin-bottom: 0;
+}
+
+.donate-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin: 1.5rem 0 2rem;
+}
+.donate-option {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.donate-option h3 {
+  font-size: 15px;
+  color: var(--color-navy);
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.donate-option h3 i {
+  color: var(--color-red);
+  font-size: 16px;
+}
+.btn-primary i {
+  margin-right: 4px;
+}
+.donate-option p {
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+.donate-option .etransfer-email {
+  font-weight: 700;
+  color: var(--color-red);
+  word-break: break-word;
+}
+.donate-option .btn {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.donate-note {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 700px) {
+  .donate-options {
+    grid-template-columns: 1fr;
+  }
+}

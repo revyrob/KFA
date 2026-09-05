@@ -1,0 +1,202 @@
+/* ==========================================================================
+   Site layout — header, navigation, banner, main grid, footer
+   ========================================================================== */
+
+/* NAV
+   ========================================================================== */
+.nav {
+  background: var(--color-navy);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  height: 52px;
+  position: relative;
+  z-index: 100;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+  height: 100%;
+  flex-wrap: wrap;
+}
+.nav-links > li {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.nav-links > li > a {
+  color: #e8e8f0;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0 14px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  transition:
+    color 0.15s,
+    background 0.15s;
+  letter-spacing: 0.02em;
+}
+.nav-links > li > a:hover,
+.nav-links > li.active > a {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+.nav-links > li.active > a {
+  border-bottom: 2px solid var(--color-red);
+}
+.chevron {
+  font-size: 10px;
+  opacity: 0.6;
+}
+
+/* DROPDOWN */
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 0.5px solid var(--border);
+  border-radius: var(--radius-md);
+  min-width: 180px;
+  display: none;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  z-index: 200;
+}
+.nav-links > li:hover .dropdown,
+.nav-links > li:focus-within .dropdown {
+  display: block;
+}
+
+.dropdown-header {
+  background: var(--color-navy);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 14px 6px;
+}
+.dropdown a {
+  display: block;
+  padding: 9px 14px;
+  font-size: 13px;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 0.5px solid var(--border);
+  position: relative;
+}
+.dropdown a:last-child {
+  border-bottom: none;
+}
+.dropdown a:hover {
+  background: var(--color-purple-pale);
+  color: var(--color-navy);
+}
+.dropdown a .sub-pills {
+  display: flex;
+  gap: 4px;
+  margin-top: 5px;
+}
+
+/* BANNER
+   ========================================================================== */
+.banner {
+  margin-right: auto;
+  margin-left: auto;
+  width: 100%;
+  max-width: 1400px;
+}
+.banner-img {
+  width: 100%;
+  height: auto;
+}
+
+/* HERO TEXT BAND
+   ========================================================================== */
+.hero-band {
+  background: var(--color-surface-1);
+  border-bottom: 3px solid var(--color-red);
+  padding: 14px 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.hero-band-text {
+  font-size: 15px;
+  color: var(--color-navy);
+  font-style: italic;
+}
+.hero-band-date {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-red);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+/* MAIN CONTENT AREA
+   ========================================================================== */
+.main {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 2rem;
+  padding: 2rem 3rem;
+  max-width: 100%;
+  flex: 1;
+}
+
+/* Simple single-column page layout for interior pages */
+.main--single {
+  grid-template-columns: 1fr;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 860px) {
+  .main {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+  .hero-band {
+    padding: 14px 1.5rem;
+  }
+}
+
+/* FOOTER
+   ========================================================================== */
+.footer {
+  background: var(--color-navy);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+  padding: 1.25rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.footer-links a {
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  font-size: 12px;
+}
+.footer-links a:hover {
+  color: #fff;
+}

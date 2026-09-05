@@ -1,0 +1,35 @@
+/* ==========================================================================
+   "Coming soon" placeholder page
+   Used by: Adjudicators, Workshops, Our Sponsors, Volunteers, Contact Us
+   ========================================================================== */
+.coming-soon {
+  text-align: center;
+  padding: 3rem 1.5rem 4rem;
+  margin: 0 auto;
+  height:auto;
+}
+.coming-soon img {
+  height: 100%;
+}
+.coming-soon h1 {
+  font-size: 22px;
+  color: var(--color-navy);
+  margin-bottom: 0.75rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.coming-soon p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 0.5rem;
+}
+.coming-soon .btn {
+  margin-top: 1.5rem;
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .coming-soon img {
+    width: 100%;
+    margin: 0 auto 1.75rem;
+  }
+}
