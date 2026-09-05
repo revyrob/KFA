@@ -179,4 +179,3 @@ domain differs, update those (see "Domain assumptions" above).
 - Descriptive `alt` text on all meaningful images; decorative images use
   empty `alt=""`
 - A "Skip to main content" link for keyboard/screen-reader users
-# KFA

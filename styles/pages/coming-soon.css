@@ -5,11 +5,14 @@
 .coming-soon {
   text-align: center;
   padding: 3rem 1.5rem 4rem;
+  max-width: 640px;
   margin: 0 auto;
-  height:auto;
 }
 .coming-soon img {
-  height: 100%;
+  max-width: 420px;
+  width: 100%;
+  height: auto;
+  margin: 0 auto 1.75rem;
 }
 .coming-soon h1 {
   font-size: 22px;
@@ -26,10 +29,4 @@
 }
 .coming-soon .btn {
   margin-top: 1.5rem;
-}
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .coming-soon img {
-    width: 100%;
-    margin: 0 auto 1.75rem;
-  }
 }

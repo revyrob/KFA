@@ -335,14 +335,20 @@ a {
 /* MAIN CONTENT AREA
    ========================================================================== */
 .main {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 2rem;
   padding: 2rem 3rem;
   max-width: 100%;
   flex: 1;
 }
 
-/* Simple single-column page layout for interior pages */
+/* Simple single-column page layout for interior pages.
+   Deliberately plain block layout (not a grid override) — these pages
+   have one column of content, so there's no reason to route them through
+   CSS Grid at all, which avoids any grid item stretch/sizing quirks. */
 .main--single {
-  grid-template-columns: 1fr;
+  display: block;
   max-width: var(--max-width);
   margin: 0 auto;
   width: 100%;
@@ -405,12 +411,6 @@ a {
     top: 16px;
     transform: rotate(-45deg);
   }
-  .hamburger-bar {
-    transition:
-      transform 0.2s,
-      opacity 0.2s,
-      top 0.2s;
-  }
 
   .nav-links > li {
     width: 100%;
@@ -438,6 +438,7 @@ a {
     margin: 2px 0 6px 10px;
   }
 }
+
 
 
 
@@ -508,35 +509,35 @@ a {
 }
 
 /* Photo grid */
-.photo-grid {
+/* Photo band — full-width row of captioned placeholder tiles.
+   Each tile's caption describes the real photo that should replace it
+   (e.g. "Young pianist mid-performance") — swap in an <img> and drop the
+   caption once real festival photography is available. */
+.photo-band {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
   margin: 1.25rem 0;
 }
-.photo-placeholder {
+.photo-band-tile {
+  background: #dbeafe;
+  border: 1px solid #bcd6f0;
   border-radius: var(--radius-md);
-  overflow: hidden;
   aspect-ratio: 4/3;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 1rem;
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  color: #2c4a6b;
 }
-.photo-placeholder.p1 {
-  background: linear-gradient(135deg, #1a3a5c, #2d5a8e);
-}
-.photo-placeholder.p2 {
-  background: linear-gradient(135deg, #7b3a8e, #a855c4);
-}
-.photo-placeholder.p3 {
-  background: linear-gradient(135deg, #e84040, #c0392b);
-}
-.photo-placeholder.p4 {
-  background: linear-gradient(135deg, #1a5c3a, #2d8e5a);
+
+@media (max-width: 700px) {
+  .photo-band {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Sidebar widgets */
@@ -652,30 +653,39 @@ a {
 .workshops-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-  gap: 6px;
+  gap: 8px;
   margin-top: 10px;
 }
 .workshop-chip {
-  background: var(--color-purple-pale);
-  border: 0.5px solid var(--color-purple-pale-border);
-  border-radius: var(--radius-sm);
-  padding: 8px 4px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
   text-align: center;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
-  color: #3d2a7a;
+  color: var(--text-secondary);
   cursor: pointer;
   text-decoration: none;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.15s;
 }
 .workshop-chip:hover {
-  background: #e0d8f8;
+  transform: translateY(-2px);
 }
-.workshop-chip i {
-  display: block;
-  font-size: 18px;
-  margin-bottom: 4px;
-  color: var(--color-purple);
+.workshop-chip:hover .workshop-chip-label {
+  color: var(--color-navy);
+}
+.workshop-chip-thumb {
+  background: #dbeafe;
+  border: 1px solid #bcd6f0;
+  border-radius: var(--radius-sm);
+  aspect-ratio: 1/1;
+}
+.workshop-chip-label {
+  padding: 6px 2px 0;
+  transition: color 0.15s;
 }
 
 /* Simple info / callout box used across interior pages */
