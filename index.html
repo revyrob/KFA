@@ -5,23 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>
-      Kootenay Festival of the Arts | Trail &amp; Nelson, BC — Est. 1930
+      Kootenay Festival of the Arts | Music &amp; Dance Festival in Trail, BC
     </title>
     <meta
       name="description"
-      content="The Kootenay Festival of the Arts is a non-profit performing arts festival serving Trail, Nelson, and the surrounding Kootenay region since 1930. Adjudicated workshops in music, dance, and speech arts for students of all ages."
+      content="Adjudicated music, dance and speech arts festival in Trail, BC since 1930 — open to music teachers, dance studios, bands, choirs and performing groups across the Kootenays."
     />
+    <meta name="geo.region" content="CA-BC" />
+    <meta name="geo.placename" content="Trail, British Columbia" />
 
     <!-- Open Graph / social preview -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Kootenay Festival of the Arts" />
+    <meta property="og:locale" content="en_CA" />
     <meta
       property="og:title"
-      content="Kootenay Festival of the Arts | Trail & Nelson, BC"
+      content="Kootenay Festival of the Arts | Music & Dance Festival in Trail, BC"
     />
     <meta
       property="og:description"
-      content="Adjudicated performing arts festival serving the Kootenay region since 1930. Music, dance, speech arts, and more."
+      content="Music teachers, dance studios, bands and performing groups from across the Kootenays: enter the 2027 adjudicated festival in Trail, BC."
     />
     <meta name="twitter:card" content="summary_large_image" />
 
@@ -38,8 +41,34 @@
         "@type": "PerformingArtsOrganization",
         "name": "Kootenay Festival of the Arts",
         "alternateName": "Kootenay Music Festival Society",
+        "description": "Non-profit adjudicated music, dance and speech arts festival for students, music teachers, dance studios, bands, choirs and performing groups in the Kootenay region of British Columbia.",
         "foundingDate": "1930",
-        "areaServed": "Kootenay region, British Columbia",
+        "knowsAbout": [
+          "Music festival",
+          "Dance competition",
+          "Speech arts",
+          "Piano",
+          "Strings",
+          "Voice",
+          "Choirs",
+          "Concert bands",
+          "Woodwinds and brass"
+        ],
+        "areaServed": [
+          {
+            "@type": "AdministrativeArea",
+            "name": "Kootenay region, British Columbia"
+          },
+          { "@type": "City", "name": "Trail, BC" },
+          { "@type": "City", "name": "Rossland, BC" },
+          { "@type": "City", "name": "Castlegar, BC" },
+          { "@type": "City", "name": "Nelson, BC" },
+          { "@type": "City", "name": "Fruitvale, BC" },
+          { "@type": "City", "name": "Salmo, BC" },
+          { "@type": "City", "name": "Creston, BC" },
+          { "@type": "City", "name": "Kaslo, BC" },
+          { "@type": "City", "name": "Nakusp, BC" }
+        ],
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Trail",
@@ -61,6 +90,7 @@
     <div class="site">
       <nav class="nav" aria-label="Primary" id="site-nav"></nav>
       <script src="scripts/nav.js"></script>
+      <script src="scripts/page-turn.js" defer></script>
 
       <div class="banner">
         <img
@@ -76,7 +106,7 @@
         <span class="hero-band-text"
           >Celebrating 97 years of performing arts in the Kootenays.</span
         >
-        <span class="hero-band-date">April 7–13, 2027 · Trail, BC</span>
+        <span class="hero-band-date">March 4 - April 10, 2027 · Trail, BC</span>
       </div>
 
       <main class="main" id="main-content">
@@ -87,13 +117,19 @@
             welcome students and performers of all ages to participate in
             adjudicated workshops across music, dance, and speech disciplines.
           </p>
+          <p>
+            Music teachers and their students, dance studios, school and
+            community bands, choirs, and music and dance groups from across the
+            Kootenays (Trail, Rossland, Castlegar, Nelson, Creston and beyond)
+            are all invited to enter.
+          </p>
 
           <h2>Festival Moments</h2>
           <div class="photo-band" role="presentation">
             <div class="photo-band-tile">
               <img
                 src="public/images/2025/choir.png"
-                alt="trumpet player 2025"
+                alt="Choir performing at the 2025 Kootenay Festival of the Arts in Trail, BC"
                 loading="lazy"
               />
               <span class="photo-band-year">2025</span>
@@ -101,7 +137,7 @@
             <div class="photo-band-tile photo-band-tile-top">
               <img
                 src="public/images/2025/dance3.png"
-                alt="dancer 2025"
+                alt="Dancer performing on stage at the 2025 festival in Trail, BC"
                 loading="lazy"
               />
               <span class="photo-band-year">2025</span>
@@ -109,7 +145,7 @@
             <div class="photo-band-tile">
               <img
                 src="public/images/2025/guitarFlue.png"
-                alt="guitar and flute 2025"
+                alt="Guitar and flute duet performing at the 2025 festival"
                 loading="lazy"
               />
               <span class="photo-band-year">2025</span>
