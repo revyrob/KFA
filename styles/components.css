@@ -116,6 +116,7 @@
   flex-shrink: 0;
 }
 .date-label {
+  
   font-weight: 500;
   color: var(--color-navy);
 }

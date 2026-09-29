@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Contact Us page
+   ========================================================================== */
+.contact {
+  text-align: center;
+  padding: 3rem 1.5rem 4rem;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.contact h1 {
+  font-size: 22px;
+  color: var(--color-navy);
+  margin-bottom: 0.75rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.contact-intro {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+/* One card per contact person */
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-align: left;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--color-red);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+}
+.contact-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--color-navy);
+  color: #fff;
+  font-size: 22px;
+}
+.contact-name {
+  font-size: 18px;
+  color: var(--color-navy);
+  margin: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.contact-role {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 2px 0 6px;
+}
+.contact-email {
+  font-weight: 700;
+  color: var(--color-red);
+  word-break: break-word;
+}
+.contact-email:hover {
+  color: var(--color-red-dark);
+}
+.contact .btn {
+  margin-top: 1.75rem;
+}
