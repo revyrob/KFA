@@ -523,15 +523,40 @@ a {
   background: #dbeafe;
   border: 1px solid #bcd6f0;
   border-radius: var(--radius-md);
-  aspect-ratio: 4/3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 300px;
   text-align: center;
-  padding: 1rem;
   font-size: 13px;
   font-weight: 500;
   color: #2c4a6b;
+}
+.photo-band-tile:has(img) {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+/* Black band across the bottom of a photo tile, e.g. the festival year */
+.photo-band-year {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 12px;
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+.photo-band-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Add alongside .photo-band-tile to crop from the top (keeps heads in frame) */
+.photo-band-tile-top img {
+  object-position: top;
 }
 
 @media (max-width: 700px) {
@@ -588,11 +613,13 @@ a {
   flex-shrink: 0;
 }
 .date-label {
+    font-size: 14px;
+
   font-weight: 500;
   color: var(--color-navy);
 }
 .date-sub {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
 }
 
@@ -626,15 +653,41 @@ a {
   cursor: pointer;
   border: none;
 }
-.btn-primary,
-.donate-btn {
+.btn-primary {
   display: block;
   background: var(--color-red);
   color: #fff;
 }
-.btn-primary:hover,
+.btn-primary:hover {
+  background: var(--color-red-dark);
+}
+
+/* Sidebar "Donate now" button — raised red button with a heart icon */
+.donate-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: var(--color-red);
+  color: #fff;
+  border-radius: var(--radius-md);
+  box-shadow: 0 3px 0 var(--color-red-dark);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.1s;
+}
+.donate-btn i {
+  font-size: 18px;
+}
 .donate-btn:hover {
   background: var(--color-red-dark);
+}
+.donate-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--color-red-dark);
 }
 .btn-outline {
   background: transparent;
@@ -677,11 +730,82 @@ a {
 .workshop-chip:hover .workshop-chip-label {
   color: var(--color-navy);
 }
+/* Photo-print thumbnail: white frame, soft shadow, and a curled
+   bottom-right corner that rolls the page over when pressed
+   (animation is triggered by scripts/page-turn.js). */
+.workshop-chip {
+  perspective: 800px;
+}
 .workshop-chip-thumb {
-  background: #dbeafe;
-  border: 1px solid #bcd6f0;
-  border-radius: var(--radius-sm);
+  position: relative;
+  display: block;
   aspect-ratio: 1/1;
+  padding: 5px;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow:
+    0 1px 2px rgba(0, 0, 0, 0.12),
+    0 4px 10px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  transform-origin: left center;
+}
+.workshop-chip-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 2px;
+}
+/* The curled corner: the lower-right half shows the page behind,
+   the upper-left half is the back of the photo paper folding over */
+.workshop-chip-thumb::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(
+    to top left,
+    var(--color-bg) 50%,
+    #e9e9ee 50%,
+    #ffffff 70%,
+    #cfcfd8 100%
+  );
+  box-shadow: -2px -2px 5px rgba(0, 0, 0, 0.18);
+  border-top-left-radius: 4px;
+  transition:
+    width 0.2s ease,
+    height 0.2s ease;
+}
+.workshop-chip:hover .workshop-chip-thumb::after,
+.workshop-chip:focus-visible .workshop-chip-thumb::after {
+  width: 34px;
+  height: 34px;
+}
+
+/* Pressed: the corner rolls up across the photo, then the page turns away */
+.workshop-chip.is-turning {
+  pointer-events: none;
+}
+.workshop-chip.is-turning .workshop-chip-thumb::after {
+  animation: corner-roll 0.45s ease-in forwards;
+}
+.workshop-chip.is-turning .workshop-chip-thumb {
+  animation: page-turn 0.5s ease-in 0.3s forwards;
+}
+@keyframes corner-roll {
+  to {
+    width: 200%;
+    height: 200%;
+    box-shadow: -6px -6px 14px rgba(0, 0, 0, 0.25);
+  }
+}
+@keyframes page-turn {
+  to {
+    transform: rotateY(-95deg);
+    opacity: 0;
+  }
 }
 .workshop-chip-label {
   padding: 6px 2px 0;

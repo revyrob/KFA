@@ -21,7 +21,7 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-YOUR-DOMAIN.example/pages/workshops.html</loc>
+    <loc>https://REPLACE-WITH-YOUR-DOMAIN.example/pages/genres.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -39,5 +39,10 @@
     <loc>https://REPLACE-WITH-YOUR-DOMAIN.example/pages/contact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://REPLACE-WITH-YOUR-DOMAIN.example/pages/registration.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

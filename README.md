@@ -12,7 +12,7 @@ kfota-website/
 ├── sitemap.xml              Lists all pages for search engines
 ├── pages/                   Every other page
 │   ├── adjudicators.html    Coming soon (2027)
-│   ├── workshops.html       Coming soon (2027)
+│   ├── genres.html       Coming soon (2027)
 │   ├── sponsors.html        Coming soon (2027)
 │   ├── donations.html       Real content + printable PDF
 │   ├── history.html         Real content + images

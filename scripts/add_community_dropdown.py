@@ -8,7 +8,7 @@ ROOT = "/home/claude/kfota-website"
 ACTIVE_MAP = {
     "index.html": "home",
     "adjudicators.html": "adjudicators",
-    "workshops.html": "workshops",
+    "genres.html": "genres",
     "sponsors.html": "community",
     "donations.html": "community",
     "volunteers.html": "community",
@@ -27,16 +27,15 @@ def build_nav(prefix, active_key):
 
     workshops_cls = ' class="active"' if active_key == "workshops" else ""
     workshops = f'''        <li{workshops_cls}>
-          <a href="{prefix}pages/workshops.html">Workshops <span class="chevron">▾</span></a>
+          <a href="{prefix}pages/genres.html">Workshops <span class="chevron">▾</span></a>
           <div class="dropdown">
             <div class="dropdown-header">Workshops</div>
-            <a href="{prefix}pages/workshops.html#choral">Choral</a>
-            <a href="{prefix}pages/workshops.html#dance">Dance</a>
-            <a href="{prefix}pages/workshops.html#guitar">Guitar</a>
-            <a href="{prefix}pages/workshops.html#piano">Piano</a>
-            <a href="{prefix}pages/workshops.html#woodwinds">Woodwinds</a>
-            <a href="{prefix}pages/workshops.html#strings">Strings</a>
-            <a href="{prefix}pages/workshops.html#speech">Speech</a>
+            <a href="{prefix}pages/genres.html#dance">Dance</a>
+            <a href="{prefix}pages/genres.html#guitar">Guitar</a>
+            <a href="{prefix}pages/genres.html#piano">Piano</a>
+            <a href="{prefix}pages/genres.html#woodwinds">Woodwinds</a>
+            <a href="{prefix}pages/genres.html#strings">Strings</a>
+            <a href="{prefix}pages/genres.html#speech">Speech</a>
           </div>
         </li>'''
 
