@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://REPLACE-WITH-YOUR-DOMAIN.example/</loc>
+    <loc>https://www.kootenayfestivalofthearts.ca/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-YOUR-DOMAIN.example/pages/history.html</loc>
+    <loc>https://www.kootenayfestivalofthearts.ca/pages/history.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-YOUR-DOMAIN.example/pages/donations.html</loc>
+    <loc>https://www.kootenayfestivalofthearts.ca/pages/donations.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-YOUR-DOMAIN.example/pages/adjudicators.html</loc>
+    <loc>https://www.kootenayfestivalofthearts.ca/pages/adjudicators.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-YOUR-DOMAIN.example/pages/genres.html</loc>
+    <loc>https://www.kootenayfestivalofthearts.ca/pages/genres.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-YOUR-DOMAIN.example/pages/sponsors.html</loc>
+    <loc>https://www.kootenayfestivalofthearts.ca/pages/sponsors.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-YOUR-DOMAIN.example/pages/volunteers.html</loc>
+    <loc>https://www.kootenayfestivalofthearts.ca/pages/volunteers.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-YOUR-DOMAIN.example/pages/contact.html</loc>
+    <loc>https://www.kootenayfestivalofthearts.ca/pages/contact.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://REPLACE-WITH-YOUR-DOMAIN.example/pages/registration.html</loc>
+    <loc>https://www.kootenayfestivalofthearts.ca/pages/registration.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

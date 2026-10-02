@@ -37,9 +37,12 @@
   // Site root, worked out from this script's location, so links work from / and /pages/
   const root = new URL("../", document.currentScript.src);
   const url = (href) => (href === "#" ? "#" : new URL(href, root).href);
-  const page = (href) => new URL(href, root).pathname;
+  // Compare pages by name, so /pages/genres.html and the clean URL /genres match
+  const name = (path) =>
+    path.replace(/\/$/, "/index.html").replace(/\.html$/, "").split("/").pop();
+  const page = (href) => name(new URL(href, root).pathname);
 
-  const here = location.pathname.replace(/\/$/, "/index.html");
+  const here = name(location.pathname);
   const isCurrent = (l) =>
     (l.href !== "#" && page(l.href) === here) ||
     (l.children || []).some((c) => page(c.href) === here);
