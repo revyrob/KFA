@@ -1,0 +1,74 @@
+# Deploys the site to the Secure by Design server whenever main is pushed.
+# Setup steps and the list of required secrets: see deploy/PIPELINE-SETUP.md
+name: Deploy to Secure by Design
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run: list what would change on the server without copying anything"
+        type: boolean
+        default: true
+
+# Never run two deploys at once
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the site
+        uses: actions/checkout@v4
+
+      - name: Check deploy settings
+        env:
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+        run: |
+          # Guard against copying (and deleting) at the wrong place on the server
+          case "$DEPLOY_PATH" in
+            ""|"/"|"~"|"~/") echo "::error::DEPLOY_PATH secret is missing or unsafe"; exit 1 ;;
+          esac
+
+      - name: Set up SSH key
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "$KNOWN_HOSTS" > ~/.ssh/known_hosts
+
+      - name: Copy site to server
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ secrets.DEPLOY_PORT }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '--dry-run' || '' }}
+        run: |
+          # --delete removes files from the server that were removed from the repo.
+          # Excluded paths are never deleted, so the old WordPress uploads stay.
+          rsync -rltz --delete --itemize-changes $DRY_RUN \
+            --chmod=D755,F644 \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude 'deploy/' \
+            --exclude '*.py' \
+            --exclude '*.md' \
+            --exclude '.gitignore' \
+            --exclude '.vscode/' \
+            --exclude 'wp-content/' \
+            -e "ssh -i ~/.ssh/deploy_key -p ${DEPLOY_PORT:-22} -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
+            ./ "$DEPLOY_USER@$DEPLOY_HOST:${DEPLOY_PATH%/}/"
+
+      - name: Remove SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
