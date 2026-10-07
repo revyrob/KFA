@@ -1,7 +1,8 @@
 # Deploy pipeline setup (GitHub Actions → Secure by Design)
 
 Every push to `main` runs `.github/workflows/deploy.yml`, which copies the
-site to the Secure by Design server with `rsync` over SSH.
+site to the Secure by Design server over SFTP (using lftp; the server is
+SFTP-only, so rsync is not used).
 
 ## 1. Make a deploy key pair (on your computer, once)
 
@@ -31,7 +32,7 @@ Ask them for:
 - full path of the folder the site is served from
 - the server's **SSH host key fingerprint** (so you can confirm you're
   connecting to their real server)
-- confirmation that `rsync` is installed and that GitHub Actions' IP addresses
+- confirmation that the deploy user has SFTP access and that GitHub Actions' IP addresses
   can connect
 
 **Important:** the deploy folder must contain only this site. The pipeline
@@ -79,7 +80,7 @@ If the list looks right, run it again with **Dry run** unticked, or merge to
 | `Permission denied (publickey)` | Public key not installed for that user, or wrong `DEPLOY_USER` |
 | `Host key verification failed` | `DEPLOY_KNOWN_HOSTS` missing or doesn't match the server |
 | `Connection timed out` | Wrong host or port, or their firewall blocks GitHub's IP addresses |
-| `rsync: command not found` | `rsync` isn't installed on their server |
+| `Access failed` / `No such file` | `DEPLOY_PATH` is wrong. On SFTP-only accounts the path is often relative to the login folder (e.g. `/public_html` or `public_html`) |
 | `Permission denied` while writing files | Deploy user can't write to `DEPLOY_PATH` |
 
 ## Changing or revoking access
