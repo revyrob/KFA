@@ -13,7 +13,7 @@ kfota-website/
 ├── pages/                   Every other page
 │   ├── adjudicators.html    Coming soon (2027)
 │   ├── genres.html       Coming soon (2027)
-│   ├── sponsors.html        Coming soon (2027)
+│   ├── sponsors.html        Sponsor logos
 │   ├── donations.html       Real content + printable PDF
 │   ├── history.html         Real content + images
 │   ├── volunteers.html      Coming soon (2027)
@@ -98,9 +98,10 @@ event photos were provided) — swap in real images by replacing the
 `.photo-placeholder` divs in `index.html` with `<img>` tags pointing to new
 files in `public/images/`.
 
-The sidebar's "Our sponsors" widget on the homepage still shows generic
-placeholder boxes — add real sponsor logos to `public/images/` and update
-`index.html` once the sponsors page has real content.
+Sponsor logos live in `public/images/sponsors/` and appear in two places: the
+"Our sponsors" widget in `index.html` and the grid in `pages/sponsors.html` —
+update both when sponsors change. Reversed (white) logos get the
+`sponsor-box--dark` class for a dark-blue background.
 
 ## The donation PDF
 
