@@ -1,0 +1,232 @@
+/* ==========================================================================
+   Adjudicators page
+   ========================================================================== */
+/* Page tokens — the adjudicator styles reference these short names.
+   They map to the site-wide tokens in main.css, except --aqua, which is
+   specific to this page's "2027 Festival" eyebrow. */
+:root {
+  --aqua: #7ee8f2;
+  --ink: var(--color-navy);
+  --navy: var(--color-navy);
+  --red: var(--color-red);
+  --bg: var(--color-bg);
+  --soft: var(--surface-1);
+  --line: var(--border);
+}
+
+/* ---------- Intro ---------- */
+main {
+  flex: 1;
+}
+.intro {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 72px 24px 24px;
+  text-align: center;
+}
+.eyebrow {
+  display: inline-block;
+  background: var(--aqua);
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 6px 16px;
+  transform: rotate(-1.5deg);
+  margin-bottom: 18px;
+}
+.intro h1 {
+  margin: 0 0 14px;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.15;
+}
+.intro p {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+/* ---------- Adjudicator list ---------- */
+.panel {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.adj {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 36px;
+  align-items: start;
+  padding: 32px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+}
+.adj:nth-child(even) {
+  grid-template-columns: 1fr 280px;
+}
+.adj:nth-child(even) .photo {
+  order: 2;
+}
+
+.photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--soft);
+  border: 2px dashed #c9c9d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.photo .placeholder {
+  text-align: center;
+  color: #6b6d80;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.photo .placeholder svg {
+  display: block;
+  margin: 0 auto 8px;
+}
+.photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo.has-img {
+  border: 0;
+}
+
+.bio .discipline {
+  display: inline-block;
+  color: var(--red);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.bio h2 {
+  margin: 0 0 16px;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 1.2;
+}
+.bio h2::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--red);
+  margin-top: 12px;
+}
+.bio p {
+  margin: 0 0 14px;
+  font-size: 17px;
+  line-height: 1.65;
+  font-weight: 300;
+  color: var(--text-secondary);
+}
+.bio p:last-child {
+  margin-bottom: 0;
+}
+
+.back {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 72px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+.btn:hover {
+  background: var(--ink);
+  color: #fff;
+}
+
+/* ---------- Footer ---------- */
+footer {
+  background: var(--navy);
+  color: #d6d6e0;
+}
+.foot {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 16px 44px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 400;
+}
+.foot-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.foot-links a:hover {
+  color: #fff;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 760px) {
+  nav {
+    padding: 0 8px;
+  }
+  nav a {
+    height: 48px;
+    padding: 0 10px;
+    font-size: 14px;
+  }
+  .intro {
+    padding-top: 48px;
+  }
+  .intro h1 {
+    font-size: 32px;
+  }
+  .adj,
+  .adj:nth-child(even) {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding: 20px;
+  }
+  .adj:nth-child(even) .photo {
+    order: 0;
+  }
+  .photo {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .foot {
+    padding: 16px;
+    justify-content: center;
+    text-align: center;
+  }
+  .foot-links {
+    justify-content: center;
+  }
+}
