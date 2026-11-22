@@ -8,17 +8,13 @@
       label: "Genres",
       href: "pages/genres.html",
       children: [
-        { label: "Dance", href: "pages/genres.html#dance" },
-        { label: "Pianoforte", href: "pages/genres.html#pianoforte" },
-        {
-          label: "Voice and Speech Arts",
-          href: "pages/genres.html#voiceSpeechArts",
-        },
-        {
-          label: "Woodwinds, Brass & Bands",
-          href: "pages/genres.html#woodwindsBrassBands",
-        },
-        { label: "Strings", href: "pages/genres.html#strings" },
+        // Genre pages show the General Rules pop-up first (syllabus.js)
+        { label: "All genres", href: "pages/genres.html" },
+        { label: "Dance", href: "pages/dance.html" },
+        { label: "Pianoforte", href: "pages/piano.html" },
+        { label: "Voice and Speech Arts", href: "pages/voice.html" },
+        { label: "Woodwinds, Brass & Bands", href: "pages/winds.html" },
+        { label: "Strings & Classical Guitar", href: "pages/strings.html" },
       ],
     },
     {

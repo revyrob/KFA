@@ -1,0 +1,828 @@
+/* ==========================================================================
+   Syllabus pages — General Rules (genres.html) and each genre page
+   (dance, piano, voice, strings, winds).
+   ========================================================================== */
+
+.syl {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  color: var(--text-secondary);
+  font-weight: 300;
+}
+
+/* ---------- Page header ---------- */
+.syl-hero {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+.syl-eyebrow {
+  display: inline-block;
+  color: var(--color-red);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.syl-hero h1 {
+  color: var(--color-navy);
+  font-weight: 500;
+  font-size: 38px;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.syl-hero p {
+  font-size: 17px;
+  line-height: 1.6;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.syl-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 22px;
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 400;
+}
+.syl-meta a {
+  color: var(--color-purple-dark);
+}
+
+/* ---------- Fees panel (top of every syllabus page) ---------- */
+.fees {
+  background: var(--color-navy);
+  color: var(--text-on-dark);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  margin-bottom: 2rem;
+}
+.fees + .fees {
+  margin-top: -1rem;
+}
+.fees-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  margin-bottom: 14px;
+}
+.fees-head h2 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.fees-head span {
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffb3b3;
+  letter-spacing: 0.03em;
+}
+.fee-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 10px;
+}
+.fee-grid > div {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+}
+.fee-grid dt {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+}
+.fee-grid dd {
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  margin-top: 2px;
+}
+.fee-grid dd small {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+}
+.deadline {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.syl .fees strong {
+  color: #fff;
+  font-weight: 500;
+}
+
+/* ---------- In-page jump links ---------- */
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2rem;
+  padding: 0;
+  list-style: none;
+}
+.toc a {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--color-lilac);
+  color: var(--color-purple-dark);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+.toc a:hover {
+  background: #d4c8f8;
+}
+
+/* ---------- Pill strip: sticky single-row bar at the top of a syllabus page.
+   syllabus.js wraps the page's first .toc in .pill-strip; without JS the
+   pills simply show as a wrapped list. ---------- */
+.site:has(.pill-strip) {
+  overflow-x: clip; /* lets the strip run edge to edge without a sideways scrollbar */
+}
+.pill-strip {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  /* full-bleed: edge to edge of the screen, whatever the content width.
+     --scrollbar (set by syllabus.js) stops it running under the scrollbar. */
+  margin: -0.5rem calc(50% - 50vw + var(--scrollbar, 0px) / 2) 1.75rem;
+  background: #fff;
+  box-shadow:
+    0 1px 0 var(--border),
+    0 6px 14px -10px rgba(26, 26, 46, 0.35);
+}
+.pill-strip-inner {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto;
+}
+.pill-strip .toc {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  margin: 0;
+  padding: 10px 1.5rem;
+}
+.pill-strip .toc::-webkit-scrollbar {
+  display: none;
+}
+.pill-strip .toc li {
+  flex-shrink: 0;
+}
+/* Active pill: follows the reader as they scroll */
+.pill-strip .toc a.is-active {
+  background: var(--color-purple-dark);
+  color: #fff;
+}
+
+/* Edge fades say "there's more"; the arrow scrolls the strip */
+.pill-strip-inner::before,
+.pill-strip-inner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 64px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  z-index: 1;
+}
+.pill-strip-inner::before {
+  left: 0;
+  width: 88px;
+  background: linear-gradient(to right, #fff 45%, rgba(255, 255, 255, 0));
+}
+.pill-strip-inner::after {
+  right: 0;
+  width: 88px;
+  background: linear-gradient(to left, #fff 45%, rgba(255, 255, 255, 0));
+}
+.pill-strip.has-less .pill-strip-inner::before,
+.pill-strip.has-more .pill-strip-inner::after {
+  opacity: 1;
+}
+.pill-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--color-navy);
+  box-shadow: 0 2px 6px rgba(26, 26, 46, 0.15);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.pill-arrow:hover {
+  background: var(--color-purple-pale);
+}
+.pill-arrow svg {
+  width: 16px;
+  height: 16px;
+}
+.pill-prev {
+  left: 12px;
+}
+.pill-next {
+  right: 12px;
+}
+/* Each arrow only shows when there are pills hidden on its side */
+.pill-strip.has-less .pill-prev,
+.pill-strip.has-more .pill-next {
+  display: inline-flex;
+}
+
+/* Keep headings clear of the sticky strip when jumping to them */
+.syl .syl-section,
+.syl #fees-title {
+  scroll-margin-top: 72px;
+}
+@media (max-width: 700px) {
+  .pill-strip .toc {
+    padding: 8px 16px;
+  }
+  .pill-prev {
+    left: 8px;
+  }
+  .pill-next {
+    right: 8px;
+  }
+  .syl .syl-section,
+  .syl #fees-title {
+    scroll-margin-top: 64px;
+  }
+}
+
+/* ---------- Sections ---------- */
+.syl-section {
+  margin-bottom: 2.75rem;
+  scroll-margin-top: 1rem;
+}
+.syl-section > h2 {
+  display: inline-block;
+  color: var(--color-navy);
+  font-size: 26px;
+  font-weight: 500;
+  padding-bottom: 6px;
+  border-bottom: 3px solid var(--color-red);
+  margin-bottom: 1rem;
+}
+.syl-section h3 {
+  color: var(--color-navy);
+  font-size: 19px;
+  font-weight: 500;
+  margin: 1.5rem 0 0.6rem;
+}
+.syl-section h4 {
+  color: var(--color-navy);
+  font-size: 16px;
+  font-weight: 500;
+  margin: 1rem 0 0.4rem;
+}
+.syl p,
+.syl li,
+.syl dd {
+  font-size: 16px;
+  line-height: 1.65;
+}
+.syl p {
+  margin-bottom: 0.8rem;
+}
+.syl strong {
+  color: var(--color-navy);
+  font-weight: 500;
+}
+
+/* Numbered rules */
+.rules {
+  padding-left: 1.6rem;
+}
+.rules > li {
+  margin-bottom: 0.6rem;
+  padding-left: 0.25rem;
+}
+.rules ol,
+.rules ul {
+  padding-left: 1.4rem;
+  margin-top: 0.35rem;
+}
+.rules ol {
+  list-style: lower-alpha;
+}
+.rules ol li,
+.rules ul li {
+  margin-bottom: 0.3rem;
+}
+.rules-plain {
+  padding-left: 1.3rem;
+}
+.rules-plain li {
+  margin-bottom: 0.35rem;
+}
+.loud {
+  color: var(--color-navy);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+/* Definition lists (dance categories, speech definitions) */
+.defs dt {
+  color: var(--color-navy);
+  font-weight: 500;
+  font-size: 16px;
+  margin-top: 0.9rem;
+}
+.defs dd {
+  margin: 0.2rem 0 0;
+}
+
+/* Time-limit style key/value table */
+.kv {
+  border-collapse: collapse;
+  margin: 0.4rem 0 0.6rem;
+  font-size: 15px;
+}
+.kv td {
+  padding: 5px 18px 5px 0;
+  border-bottom: 1px solid var(--border);
+}
+.kv td:last-child {
+  font-weight: 500;
+  color: var(--color-navy);
+}
+
+/* ---------- Class groups ---------- */
+.class-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 14px;
+}
+.cg {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  padding: 14px 16px;
+}
+.cg-wide {
+  grid-column: 1 / -1;
+}
+.cg h4 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+.cg-note {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  margin-bottom: 8px !important;
+}
+.cl {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 2px 14px;
+}
+.cl li {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  padding: 3px 0;
+  border-bottom: 1px dashed var(--border);
+}
+.cl b {
+  display: inline-block;
+  min-width: 52px;
+  font-weight: 500;
+  color: var(--color-red-dark);
+}
+
+/* Provincial age levels table */
+.levels {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  margin: 0.5rem 0 1rem;
+}
+.levels th,
+.levels td {
+  text-align: left;
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--border);
+}
+.levels th {
+  background: var(--surface-1);
+  color: var(--color-navy);
+  font-weight: 500;
+}
+
+/* ---------- Checkbox label (rules pop-up) + genre cards ---------- */
+.ack-label {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-navy);
+  cursor: pointer;
+  margin-top: 8px;
+}
+.ack-label input {
+  width: 22px;
+  height: 22px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: var(--color-red);
+  cursor: pointer;
+}
+.genre-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+.genre-card {
+  position: relative;
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  text-decoration: none;
+  background: #fff;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s,
+    opacity 0.15s;
+}
+.genre-card[href]:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--color-purple-pale-border);
+}
+.genre-card h3 {
+  color: var(--color-navy);
+  font-size: 19px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+.genre-card p {
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  margin: 0 !important;
+}
+.genre-card .go {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-red-dark);
+  letter-spacing: 0.03em;
+}
+/* Buttons used on these pages */
+.syl .btn-solid {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border-radius: var(--radius-md);
+  background: var(--color-red);
+  color: #fff;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+}
+.syl .btn-solid:hover {
+  background: var(--color-red-dark);
+}
+.syl-foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+/* ---------- Supplementary Rules panels (All Genres page) ---------- */
+.rules-panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: 10px;
+  background: #fff;
+}
+.rules-panel summary {
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  color: var(--color-navy);
+  font-size: 18px;
+  font-weight: 500;
+}
+.rules-panel summary::-webkit-details-marker {
+  display: none;
+}
+.rules-panel summary::after {
+  content: "+";
+  font-size: 24px;
+  line-height: 1;
+  color: var(--color-red);
+}
+.rules-panel[open] summary::after {
+  content: "–";
+}
+.rules-panel[open] summary {
+  border-bottom: 1px solid var(--border);
+}
+.rules-panel summary:hover {
+  background: var(--surface-1);
+}
+.rules-panel-body {
+  padding: 8px 18px 14px;
+}
+.rules-panel-body h4 {
+  font-size: 17px;
+  margin-top: 1rem;
+}
+
+/* ---------- General Rules button bar (top of genre pages) ---------- */
+.rules-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 14px;
+  margin: 0 auto 1.5rem;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+}
+.rules-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 18px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-red);
+  background: #fff;
+  color: var(--color-red-dark);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+}
+.rules-btn:hover {
+  background: var(--color-red);
+  color: #fff;
+}
+.rules-btn.is-read {
+  border-color: var(--color-purple-pale-border);
+  background: var(--color-purple-pale);
+  color: var(--color-purple-dark);
+}
+.rules-btn.is-read:hover {
+  background: var(--color-purple-dark);
+  color: #fff;
+}
+.link-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  color: var(--color-purple-dark);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* ---------- General Rules pop-up ---------- */
+html.rd-open {
+  overflow: hidden;
+}
+.rules-dialog {
+  width: min(860px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  font-family: Oswald, var(--font-sans);
+  color: var(--text-primary);
+  background: #fff;
+}
+.rules-dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+.rules-dialog::backdrop {
+  background: rgba(26, 26, 46, 0.72);
+}
+.rd-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 22px 12px;
+  border-bottom: 3px solid var(--color-red);
+}
+.rd-head h2 {
+  color: var(--color-navy);
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.15;
+}
+.rd-head p {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+.rd-close {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--surface-1);
+  color: var(--color-navy);
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+.rd-close:hover {
+  background: var(--border);
+}
+.rd-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 16px 22px 8px;
+  max-width: none;
+  margin: 0;
+}
+.rd-body h3 {
+  color: var(--color-navy);
+  font-size: 19px;
+  font-weight: 500;
+  margin: 1.4rem 0 0.5rem;
+}
+.rd-body:focus {
+  outline: none;
+}
+.rd-body:focus-visible {
+  outline: 2px solid var(--color-purple);
+  outline-offset: -2px;
+}
+.rd-end {
+  text-align: center;
+  font-size: 13px !important;
+  color: var(--text-muted);
+  margin: 1.5rem 0 0.5rem !important;
+}
+.rd-foot {
+  padding: 12px 22px 16px;
+  border-top: 1px solid var(--border);
+  background: var(--color-surface-1);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+.rd-foot .ack-label {
+  font-size: 15px;
+  margin-top: 0;
+}
+.rd-foot .ack-label:has(input:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.rd-foot .ack-label input:disabled {
+  cursor: not-allowed;
+}
+.rd-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px 14px;
+  margin-top: 10px;
+}
+.rd-hint {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-red-dark);
+  margin-right: auto;
+}
+.rules-dialog .btn-solid {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-red);
+  color: #fff;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+}
+.rules-dialog .btn-solid:hover:not(:disabled) {
+  background: var(--color-red-dark);
+}
+.rules-dialog .btn-solid:disabled {
+  background: #c9c9d4;
+  cursor: not-allowed;
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 700px) {
+  .rules-dialog {
+    width: calc(100vw - 16px);
+    max-height: calc(100dvh - 16px);
+  }
+  .rd-head,
+  .rd-body,
+  .rd-foot {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .rd-head h2 {
+    font-size: 22px;
+  }
+  .rd-actions .btn-solid {
+    width: 100%;
+    justify-content: center;
+  }
+  .syl {
+    padding: 1.75rem 16px 3rem;
+  }
+  .syl-hero h1 {
+    font-size: 30px;
+  }
+  .syl-section > h2 {
+    font-size: 22px;
+  }
+  .fees {
+    padding: 18px 16px;
+  }
+  .class-groups {
+    grid-template-columns: 1fr;
+  }
+  .levels {
+    font-size: 14px;
+  }
+  .levels th,
+  .levels td {
+    padding: 6px;
+  }
+}
+
+/* Print: drop the navy panel background so fees print legibly */
+@media print {
+  .nav,
+  .footer,
+  .toc,
+  .pill-strip,
+  .rules-bar,
+  .syl-foot {
+    display: none !important;
+  }
+  .fees {
+    background: none;
+    color: #000;
+    border: 1px solid #999;
+  }
+  .fees-head h2,
+  .fee-grid dd,
+  .fee-grid dt,
+  .syl .fees strong {
+    color: #000;
+  }
+}

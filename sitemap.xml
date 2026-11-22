@@ -23,7 +23,32 @@
   <url>
     <loc>https://www.kootenayfestivalofthearts.ca/pages/genres.html</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.kootenayfestivalofthearts.ca/pages/dance.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.kootenayfestivalofthearts.ca/pages/piano.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.kootenayfestivalofthearts.ca/pages/voice.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.kootenayfestivalofthearts.ca/pages/strings.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.kootenayfestivalofthearts.ca/pages/winds.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://www.kootenayfestivalofthearts.ca/pages/sponsors.html</loc>
