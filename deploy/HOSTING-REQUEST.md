@@ -36,17 +36,17 @@ please keep it backed up and restorable.
 ## 2. Deploy pipeline from GitHub
 
 We'd like every push to the `main` branch to deploy automatically, using a
-GitHub Actions workflow that copies the files to your server with `rsync` over
-SSH. Please provide:
+GitHub Actions workflow that uploads the files to your server over SFTP
+(using lftp). Please provide:
 
 - [ ] **SSH/SFTP host name and port**
 - [ ] **A deploy-only user** whose access is limited to this site's web root
-      (no shell beyond what `rsync` needs, no access to other sites)
+      (SFTP-only is fine; no access to other sites)
 - [ ] **Key-based login:** we'll send you an SSH **public** key to install for
       that user. The private key stays in GitHub's encrypted secrets. No
       passwords.
 - [ ] **The exact path of the web root** on the server
-- [ ] Confirmation that **`rsync` is installed** on the server
+- [x] SFTP access for that user (confirmed: SFTP-only)
 - [ ] Whether **connections are restricted by IP address**. GitHub Actions
       connects from changing IP addresses, so either allow GitHub's published
       ranges, or tell us if you'd prefer to **pull from GitHub yourselves**
