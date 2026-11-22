@@ -121,6 +121,23 @@ python3 build_donation_pdf.py
 
 This overwrites `public/downloads/donation-form.pdf` in place.
 
+## The syllabus pages
+
+- `pages/genres.html` is the All Genres page: genre cards, welcome and
+  committee, contact, donation appeal, and every genre's Supplementary Rules.
+- Each genre has its own page: `dance`, `piano`, `voice` (speech + choral),
+  `strings` (strings + classical guitar) and `winds` (woodwinds, brass, bands).
+- The General Rules pop-up and the Dates & Venues block are shared by all of
+  them and live in `scripts/syllabus.js`. Edit them there once.
+- Each genre page asks visitors to read the General Rules before using it.
+
+The Supplementary Rules on the All Genres page are copied from the genre pages.
+After changing Supplementary Rules on any genre page, run from the repo root:
+
+```bash
+python scripts/build_genre_rules.py
+```
+
 ## Domain — action needed before going live
 
 No placeholder website domain is hardcoded anywhere anymore (an earlier
